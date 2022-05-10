@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import Service from './Service';
 
 const AvailableAppointment = ({date}) => {
     const [services, setServices] = useState([]);
@@ -13,9 +14,12 @@ const AvailableAppointment = ({date}) => {
     return (
         <div>
             <h4 className='text-xl text-secondary text-center'>Available Appointment On {format(date, 'PP')}</h4>
-            <div>
+            <div className='grid lg:grid-cols-3 gap-10'>
                 {
-                    services.map(service => <p>{service.name}</p>)
+                    services.map(service => <Service
+                    key={service._id}
+                    service={service}
+                    ></Service>)
                 }
             </div>
         </div>
