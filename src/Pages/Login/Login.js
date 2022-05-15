@@ -1,9 +1,9 @@
 import React from 'react';
 import auth from '../../firebase.init';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -15,6 +15,9 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || '/';
 
     let signInError;
 
@@ -25,15 +28,16 @@ const Login = () => {
     if(error || gError){
         signInError = <p className='text-red-500'>{error?.message || gError?.message}</p>
     }
-
+    
+    if(user || gUser){
+        navigate(from, {replace: true});
+    }
+    
     const onSubmit = data => {
         console.log(data)
         signInWithEmailAndPassword(data.email, data.password);
     };
 
-    if(user || gUser){
-        console.log(user || gUser);
-    }
 
     return (
         <div className='flex h-screen justify-center items-center'>
