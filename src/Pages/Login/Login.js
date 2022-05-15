@@ -48,7 +48,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="form-control w-full max-w-xs">
-                            <label className="label">
+                            <label value="" className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" placeholder="Your email" 
@@ -62,13 +62,13 @@ const Login = () => {
                                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
                                  message: 'Provide a valid Email'
                              } })}/>
-                            <label className="label">
+                            <label value="" className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
-                            <label className="label">
+                            <label value="" className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" placeholder="password" 
@@ -82,7 +82,7 @@ const Login = () => {
                                  value: 6,
                                  message: 'Must Be 6 Characters or longer'
                              } })}/>
-                            <label className="label">
+                            <label value="" className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                             </label>

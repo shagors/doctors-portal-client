@@ -4,6 +4,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken'
 
 const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -15,6 +16,8 @@ const SignUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [token] = useToken(user || gUser);
 
     const navigate = useNavigate();
 
@@ -28,14 +31,15 @@ const SignUp = () => {
         signInError = <p className='text-red-500'>{error?.message || gError?.message || updateError?.message}</p>
     }
     
-    if(user || gUser){
-        // navigate('/');
+    if(token){
+        navigate('/appointment');
+
     }
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({displayName: data?.name});
-        navigate('/appointment');
+        
     };
 
 
@@ -46,7 +50,7 @@ const SignUp = () => {
                     <h2 className="text-center text-3xl font-bold">Sign Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-xs">
-                            <label className="label">
+                            <label value="" className="label">
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="text" placeholder="Your Name" 
@@ -57,12 +61,12 @@ const SignUp = () => {
                                     message: 'Name is required'
                                 }
                                 })}/>
-                            <label className="label">
+                            <label value="" className="label">
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
-                            <label className="label">
+                            <label value="" className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" placeholder="Your email" 
@@ -76,13 +80,13 @@ const SignUp = () => {
                                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
                                  message: 'Provide a valid Email'
                              } })}/>
-                            <label className="label">
+                            <label value="" className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
-                            <label className="label">
+                            <label value="" className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" placeholder="password" 
@@ -96,7 +100,7 @@ const SignUp = () => {
                                  value: 6,
                                  message: 'Must Be 6 Characters or longer'
                              } })}/>
-                            <label className="label">
+                            <label value="" className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                             </label>
