@@ -20,7 +20,7 @@ const Users = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Job</th>
                             <th>Favorite Color</th>
