@@ -50,20 +50,20 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                                 appointments.map((a, index) =><tr key={a._id}>
-                                <th>{index + 1}</th>
-                                <td>{a.patientName}</td>
-                                <td>{a.date}</td>
-                                <td>{a.slot}</td>
-                                <td>{a.treatment}</td>
-                                <td>
-                                    {(a?.price && !a?.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
-                                    {(a?.price && a?.paid) && <div>
-                                            <p><span className='text-success'>Paid</span></p>
-                                            <p>Transaction ID: <span className='text-success'>{a.transactionId}</span></p>
-                                        </div>}
-                                </td>
-                            </tr>)
+                            appointments.map((a, index) =><tr key={a._id}>
+                            <th>{index + 1}</th>
+                            <td>{a.patientName}</td>
+                            <td>{a.date}</td>
+                            <td>{a.slot}</td>
+                            <td>{a.treatment}</td>
+                            <td>
+                                {(a?.price && !a?.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
+                                {(a?.price && a?.paid) && <div>
+                                        <p><span className='text-success'>Paid</span></p>
+                                        <p>Transaction ID: <span className='text-success'>{a.transactionId}</span></p>
+                                    </div>}
+                            </td>
+                        </tr>)
                         }
                     </tbody>
                 </table>

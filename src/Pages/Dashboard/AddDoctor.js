@@ -7,7 +7,7 @@ import Loading from '../Shared/Loading';
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const {data: services, isLoading} = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()));
+    const {data: services, isLoading} = useQuery('services', () => fetch('https://fast-depths-58856.herokuapp.com/service').then(res => res.json()));
 
     const imageStorageKey = 'dbc1132a143866016b0f2959d03a6274';
 
