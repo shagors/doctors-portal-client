@@ -31,7 +31,7 @@ const AddDoctor = () => {
                     img: img
                 }
                 // send to database
-                fetch('http://localhost:5000/doctor', {
+                fetch('https://fast-depths-58856.herokuapp.com/doctor', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
